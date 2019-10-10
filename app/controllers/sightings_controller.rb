@@ -6,7 +6,11 @@ class SightingsController < ApplicationController
 
   def show
     sighting = Sightiing.find_by(id: params[:id])
-    #render json: { id: sighting.id, bird: sighting.bird, location: sighting.location }
-    render json: sighting, include: [:bird, :location]
+    if sighting
+      #render json: { id: sighting.id, bird: sighting.bird, location: sighting.location }
+      render json: sighting, include: [:bird, :location]
+    else
+      render json: { message: 'no sightings found with that id' }
+    end
   end
 end
